@@ -1,0 +1,23 @@
+.Slide{
+    display: flex;
+    justify-content: center;
+    margin: 70px 0;
+}
+
+.SlideInner{
+    display: flex;
+    justify-content: space-between;
+    max-width: 976px;
+    width: 100%;
+    align-items: center;
+}
+
+
+.Features{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 488px;
+    height: 420px;
+    align-content: space-between;
+    justify-content: space-between;
+}

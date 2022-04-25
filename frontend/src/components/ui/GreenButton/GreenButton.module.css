@@ -1,0 +1,33 @@
+.myBtn{
+    font-family: proxima-nova, sans-serif;
+    min-height: 38px;
+    font-size: 14px;
+    line-height: 22px;
+    padding-inline-end: 16px;
+    padding-inline-start: 16px;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    flex-shrink: 0;
+    appearance: initial;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(242, 244, 251);
+    border-radius: 8px;
+    transition: background-color 0.15s ease-out 0s, color, opacity, border;
+    outline: none;
+    text-decoration: none;
+    background: #22A48F;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+}
+
+.myBtn:hover{
+    background-color: teal;
+    transition: background-color .1s linear;
+}
