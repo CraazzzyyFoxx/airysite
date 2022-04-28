@@ -1,0 +1,17 @@
+.user-menu {
+    margin-inline-start: 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-menu span{
+    margin-inline-start: 10px;
+    font-weight: 600;
+    font-size: 13px;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}

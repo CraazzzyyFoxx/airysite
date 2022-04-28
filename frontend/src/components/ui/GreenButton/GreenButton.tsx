@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import classes from './GreenButton.module.css';
+import {Button} from "antd";
 
 interface GreenButtonProps {
     id?: string
@@ -9,13 +10,10 @@ interface GreenButtonProps {
 }
 
 
-const GreenButton: FC<GreenButtonProps> = ({id,
-                                               children,
-                                               onClick,
-                                               style}) => {
+const GreenButton: FC<GreenButtonProps> = (props) => {
     return (
-        <button className={classes.myBtn} style={style} onClick={onClick}>
-            {children}
+        <button className={classes.myBtn} {...props}>
+            {props.children}
         </button>
     );
 };

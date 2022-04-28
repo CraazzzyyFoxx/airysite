@@ -1,0 +1,12 @@
+.stats-title {
+    margin-top: 30%;
+    text-align: center;
+    background-position: center;
+    justify-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stats-title .btn-img {
+    width: 60%;
+}

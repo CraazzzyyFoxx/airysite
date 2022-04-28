@@ -1,5 +1,63 @@
 @import '~antd/dist/antd.css';
 
-* {
-    font-family: "Open Sans", sans-serif;
+/*
+general
+-------
+*/
+
+.layout {
+    background: #272934;
+}
+
+
+
+body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+
+}
+
+div {
+    box-sizing: border-box;
+    border: 0px;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0px;
+    outline: 0px;
+    padding: 0px;
+    vertical-align: baseline;
+}
+
+.site-layout-content {
+    min-height: 280px;
+    padding: 24px;
+}
+
+.container-fluid {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+@media only screen and (max-width: 991px) {
+    .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+        transform: scale(1.14);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .pricingBlock .ant-row > div:nth-child(2) .ant-list-item {
+        transform: scale(1);
+    }
+
+    .mobileVisible {
+        display: block;
+    }
+
+    .mobileHidden {
+        display: none;
+    }
 }

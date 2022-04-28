@@ -1,0 +1,57 @@
+.app-header {
+    position: fixed;
+    display: flex;
+    left: 0;
+    right: 0;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 10px 40px;
+    width: 100%;
+    height: auto;
+    background: #272934;
+
+
+}
+
+
+.ant-layout-header .logo {
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    font-size: 22px;
+    text-transform: uppercase;
+    border: 0;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.ant-layout-header a {
+    color: #919395;
+    margin-left: 14px;
+    align-items: center;
+    transition: color 0.15s ease-out 0s, color, opacity, border;
+}
+
+.ant-layout-header a:hover {
+    color: white;
+    transition: color .1s linear;
+}
+
+
+
+
+
+
+
+

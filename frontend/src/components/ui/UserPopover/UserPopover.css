@@ -1,0 +1,59 @@
+.ant-popover-inner-content{
+    padding: 4px 4px;
+    background: rgb(23, 24, 27);
+    min-width: 160px;
+    border-radius: 6px;
+    color: white;
+}
+
+.ant-popover-inner-content p{
+    transition: background-color 0.15s ease-out 0s, color, opacity, border;
+    outline: none;
+    text-decoration: none;
+    min-height: 38px;
+    font-size: 14px;
+    line-height: 22px;
+    padding-inline-end: 16px;
+    padding-inline-start: 16px;
+    box-sizing: border-box;
+    justify-items: center;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.ant-popover-inner-content p:hover{
+    transition: background-color .1s linear;
+    background: rgb(49, 52, 61);
+    border-radius: 3px;
+
+}
+
+.ant-popover-inner {
+    background-color: rgb(23, 24, 27);
+    background-clip: padding-box;
+    border-radius: 6px;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15) \9;
+}
+
+
+.ant-popover-title {
+    min-height: 32px;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+    border-bottom: 1px solid rgb(23, 24, 27);
+}
+
+.ant-popover-message {
+    position: relative;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+}
+
+.ant-popover-arrow-content {
+    background-color: #272934;
+}
+.ant-popover-arrow-content::before {
+    background: linear-gradient(to left, #272934 50%, #272934 50%) no-repeat -10px -10px;
+}

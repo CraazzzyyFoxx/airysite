@@ -1,8 +1,16 @@
-.Slide{
+.Slide {
+    height: 724px;
     display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
     justify-content: center;
-    margin: 70px 0;
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 1240px;
+    width: 100%;
 }
+
+
 
 .SlideInner{
     display: flex;
@@ -12,6 +20,9 @@
     align-items: center;
 }
 
+.SlideInner h1 {
+    color: white;
+}
 
 .Features{
     display: flex;
