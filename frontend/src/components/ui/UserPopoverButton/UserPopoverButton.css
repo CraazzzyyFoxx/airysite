@@ -3,12 +3,8 @@
     min-height: 38px;
     font-size: 14px;
     line-height: 22px;
-    padding-inline-end: 16px;
-    padding-inline-start: 16px;
     box-sizing: border-box;
     cursor: pointer;
-    position: relative;
-    user-select: none;
     flex-shrink: 0;
     appearance: initial;
     -webkit-box-align: center;
@@ -17,7 +13,7 @@
     justify-content: center;
     color: rgb(242, 244, 251);
     background: rgb(23, 24, 27);
-    border-radius: 8px;
+    border-radius: 6px;
     transition: background-color 0.15s ease-out 0s, color, opacity, border;
     outline: none;
     text-decoration: none;
@@ -26,7 +22,8 @@
     border-color: initial;
     border-image: initial;
 
-    width: 150px;
+    width: 152px;
+    margin-bottom: 4px
 }
 
 .user-popover-button:hover{

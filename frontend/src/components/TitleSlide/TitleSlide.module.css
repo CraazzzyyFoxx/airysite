@@ -1,5 +1,5 @@
 .Slide {
-    height: 724px;
+    height: 524px;
     display: flex;
     flex-direction: column;
     -webkit-box-pack: center;
@@ -22,6 +22,7 @@
 
 .SlideInner h1 {
     color: white;
+    font-size: 45px;
 }
 
 .Features{

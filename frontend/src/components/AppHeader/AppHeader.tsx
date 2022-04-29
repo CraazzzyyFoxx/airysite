@@ -16,11 +16,11 @@ const AppHeader: FC = () => {
                 <img className="logo" src="logo.png" alt={"logo"}/>
                 <a href="https://google.com" style={{color: "white"}}>Airy</a>
             </div>
-            <div className="mobileHidden">
+            <div>
                 <Row gutter={[16, 16]}>
-                    <Col><a>Plugins</a></Col>
-                    <Col><a>Documentation</a></Col>
-                    <Col><a href={"https://discord.gg/F4WwGCtMtR"}>Support Server</a></Col>
+                    <Col  className="mobileHidden"><a>Plugins</a></Col>
+                    <Col  className="mobileHidden"><a>Documentation</a></Col>
+                    <Col  className="mobileHidden"><a href={"https://discord.gg/F4WwGCtMtR"}>Support Server</a></Col>
                     {
                         isAuth ?
                             <>
