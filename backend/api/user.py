@@ -1,18 +1,12 @@
-import typing as t
+from pprint import pprint
 
-import hikari
-from attr import fields
-from attrs import asdict, filters
 from fastapi import (
     APIRouter,
     Depends,
-    status,
-    Response,
-    Request
 )
-from fastapi.security import OAuth2PasswordRequestForm
-from starlette.responses import RedirectResponse, JSONResponse
+from starlette.responses import JSONResponse
 
+from backend.dto import dto_user, dto_guild
 from backend.services import (
     AuthService,
     UserService
@@ -20,41 +14,40 @@ from backend.services import (
 
 
 router = APIRouter(
-    prefix='/user',
+    prefix='/users',
     tags=['user'],
 )
 
 
-@router.post("/")
+@router.post("/@me")
 async def get_user(token=Depends(AuthService.requires_authorization)):
     user = await UserService.fetch_user(token)
-    return asdict(user, filter=filters.exclude(fields(hikari.OwnUser).app))
+    return dto_user(user)
 
 
 @router.post(
     "/guilds",
     dependencies=[Depends(AuthService.requires_authorization)],
 )
-async def get_guilds(token=Depends(AuthService.requires_authorization)):
-    return [asdict(guild, filter=filters.exclude(fields(hikari.OwnGuild).app))
-            for guild in await UserService.fetch_guilds(token)]
+async def fetch_guilds(token=Depends(AuthService.requires_authorization)):
+    return [dto_guild(guild) for guild in await UserService.fetch_guilds(token)]
 
 
 @router.post(
-    "/guilds/hasperms",
+    "/guilds/dashboard",
     dependencies=[Depends(AuthService.requires_authorization)],
 )
-async def get_guilds_hasperms(token=Depends(AuthService.requires_authorization)):
-    return [asdict(guild, filter=filters.exclude(fields(hikari.OwnGuild).app))
-            for guild in await UserService.fetch_guilds_with_manage_server_perm(token)]
+async def get_guilds_bot_master(token=Depends(AuthService.requires_authorization)):
+    guilds = await UserService.fetch_guilds_for_dashboard(token)
+    mutual_guilds = await UserService.fetch_mutual_guilds(guilds)
+    prepared_guilds = []
+    for guild in guilds:
+        data = dto_guild(guild)
+        if guild in mutual_guilds:
+            data["is_mutual"] = True
+        else:
+            data["is_mutual"] = False
+        prepared_guilds.append(data)
+    return JSONResponse(prepared_guilds)
 
-
-@router.post(
-    "/guilds/hasperms/mutual",
-    dependencies=[Depends(AuthService.requires_authorization)],
-)
-async def get_guilds_hasperms_mutual(token=Depends(AuthService.requires_authorization)):
-    guilds = await UserService.fetch_guilds_with_manage_server_perm(token)
-    return [asdict(guild, filter=filters.exclude(fields(hikari.OwnGuild).app))
-            for guild in await UserService.find_mutual_guilds(guilds)]
 

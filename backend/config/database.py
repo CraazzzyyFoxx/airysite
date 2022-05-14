@@ -33,7 +33,7 @@ tortoise_config = {
     },
     "apps": {
         "main": {
-            "models": ["backend.models"],
+            "models": ["backend.models.db"],
             "default_connection": "default",
         }
     },

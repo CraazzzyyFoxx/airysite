@@ -1,20 +1,22 @@
 import typing as t
 
-import hikari
-from attr import fields
-from attrs import filters, asdict
+from cashews import cache
 from fastapi import (
     APIRouter,
     Depends,
     Request,
 )
-from starlette.responses import RedirectResponse, JSONResponse
+from passlib.hash import bcrypt
+from starlette import status
+from starlette.responses import JSONResponse
 
-from backend.exceptions import UnauthorizedError
+from backend.config import jwt_config
+from backend.dto import dto_user
+from backend.exceptions import APIError
+from backend.services import UserService
 from backend.services.auth import (
     AuthService, oauth2_scheme
 )
-from backend.services.user import UserService
 
 
 router = APIRouter(
@@ -24,33 +26,37 @@ router = APIRouter(
 
 
 @router.get("/login")
-async def login(auth_service: AuthService = Depends(),):
-    return RedirectResponse(auth_service.get_oauth_url())
+async def login(request: Request, auth_service: AuthService = Depends(),):
+    return JSONResponse(auth_service.get_oauth_url(request))
 
 
-@router.post("/logout")
-async def logout(request: Request, auth_service: AuthService = Depends(), token: str = Depends(oauth2_scheme)):
-    try:
-        request.cookies.pop('refreshToken')
-    except KeyError:
-        pass
+@router.post("/logout", status_code=status.HTTP_200_OK)
+async def logout(auth_service: AuthService = Depends(), token: str = Depends(oauth2_scheme)):
     await auth_service.logout(token)
+    resp = JSONResponse({'status': "Success"})
+    resp.delete_cookie(key='refreshToken')
+    return resp
 
 
-@router.get("/callback")
-async def callback(code: str, auth_service: AuthService = Depends(), state: t.Optional[str] = None):
-    token = await auth_service.get_access_token(code)
+@router.get("/callback", status_code=status.HTTP_200_OK)
+async def callback(code: str, auth_service: AuthService = Depends(), state: str = None):
+    await auth_service.get_tokens_from_response(code, state)
 
-    user = await UserService.fetch_user(token.access_token)
-    resp = RedirectResponse("http://crypto.asuscomm.com:3000/")
-    # resp = JSONResponse({"user": asdict(user, filter=filters.exclude(fields(hikari.OwnUser).app)),
-    #                      "accessToken": token.access_token,
-    #                      "refreshToken": token.refresh_token})
+
+@router.get("/finalize-login", status_code=status.HTTP_200_OK)
+async def callback(user_service: UserService = Depends(), state: str = None):
+    token = await cache.get(state, None)
+    if not token:
+        raise APIError(status_code=status.HTTP_408_REQUEST_TIMEOUT) from None
+    user = await user_service.fetch_user(token.access_token)
+    resp = JSONResponse({"user": dto_user(user),
+                         "accessToken": token.access_token,
+                         "refreshToken": token.refresh_token})
     resp.set_cookie('refreshToken',
                     token.refresh_token.__str__(),
                     expires=int(token.expires_in.total_seconds()),
-                    httponly=True)
-    print(token, token.access_token)
+                    httponly=True,
+                    secure=True)
     return resp
 
 
@@ -62,5 +68,6 @@ async def is_authenticated(request: Request, auth_service: AuthService = Depends
     resp.set_cookie('refreshToken',
                     token.refresh_token.__str__(),
                     expires=int(token.expires_in.total_seconds()),
-                    httponly=True)
+                    httponly=True,
+                    secure=True)
     return resp
