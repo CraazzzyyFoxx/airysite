@@ -6,27 +6,6 @@
     color: white;
 }
 
-.ant-popover-inner-content p{
-    transition: background-color 0.15s ease-out 0s, color, opacity, border;
-    outline: none;
-    text-decoration: none;
-    min-height: 38px;
-    font-size: 14px;
-    line-height: 22px;
-    padding-inline-end: 16px;
-    padding-inline-start: 16px;
-    box-sizing: border-box;
-    justify-items: center;
-    cursor: pointer;
-    vertical-align: middle;
-}
-
-.ant-popover-inner-content p:hover{
-    transition: background-color .1s linear;
-    background: rgb(49, 52, 61);
-    border-radius: 3px;
-
-}
 
 .ant-popover-inner {
     background-color: rgb(23, 24, 27);

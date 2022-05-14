@@ -30,9 +30,9 @@ const UserMenu = () => {
 
     return (
         <div className="user-menu">
-            <Avatar src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.png?size=4096`}/>
             <UserPopover content={content}>
-                    <span>{user.username}</span>
+                <Avatar src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar_hash}.png?size=4096`}/>
+                <span className="mobileHidden">{user.username}</span>
             </UserPopover>
         </div>
     );
